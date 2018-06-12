@@ -2,7 +2,7 @@
 #define LEPTJSON_H__
 
 //json7种基本数据类型
-typedef enum { LEPT_NULL, LEPT_FALSE, LEPT_TRUE, LEPT_NUMBER, LEPT_STRING, LEPT_ARRAY, LEPT_OBJECT } lept_type;
+typedef enum { LEPT_NULL, LEPT_FALSE, LEPT_TRUE, LEPT_NUMBER, LEPT_STRING, LEPT_ARRAY, LEPT_OBJECT,LEPT_PARSE_NUMBER_TOO_BIG} lept_type;
 
 typedef struct {
     double n;
@@ -15,6 +15,8 @@ enum {
     LEPT_PARSE_INVALID_VALUE,
     LEPT_PARSE_ROOT_NOT_SINGULAR
 };
+
+double lept_get_number(const lept_value* v);
 
 int lept_parse(lept_value* v, const char* json);
 
