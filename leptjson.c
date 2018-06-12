@@ -64,6 +64,7 @@ static int lept_parse_literal(lept_context* c, lept_value* v,const char* literal
 //将字符串转浮点数
 static int lept_parse_number(lept_context* c, lept_value* v) {
     const char* p = c->json;
+    //校验数字是否符合规则
     if (*p == '-') p++;
     if (*p == '0') p++;
     else {
@@ -83,6 +84,7 @@ static int lept_parse_number(lept_context* c, lept_value* v) {
     }
     errno = 0;
     v->n = strtod(c->json, NULL);
+    //若errno等于ERANGE，HUGE_VAL，-HUGE_VAL则直接返回
     if (errno == ERANGE && (v->n == HUGE_VAL || v->n == -HUGE_VAL))
         return LEPT_PARSE_NUMBER_TOO_BIG;
     v->type = LEPT_NUMBER;
